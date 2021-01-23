@@ -1,0 +1,14 @@
+.userImage, .userInformation {
+    margin-top: 70px;
+}
+
+.userImage img {
+    width: 250px;
+    margin: auto;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.passwordChange {
+    margin-top: 25px;
+}

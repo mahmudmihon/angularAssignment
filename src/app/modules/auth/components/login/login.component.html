@@ -1,0 +1,52 @@
+<div class="container-fluid loginForm">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card card-signin my-5">
+        <div class="card-body">
+          <h5 class="card-title text-center">Welcome!</h5>
+          <form [formGroup]="loginForm" #lform="ngForm" (ngSubmit)="onSubmit(lform.value)" novalidate>
+            <div class="form-group">
+              <label for="formGroupExampleInput">Email</label>
+              <input type="email" class="form-control rounded-pill" id="formGroupExampleInput" name="email" formControlName="email" placeholder="Email Address">
+
+              <div *ngIf="!email?.valid && (email?.dirty || email?.touched)">
+                <div [hidden]="!email.errors.required">
+                  <p class="text-danger mt-1 font-weight-bold">Email is required!</p>
+                </div>
+                <div [hidden]="!email.errors.pattern">
+                  <p class="text-danger mt-1 font-weight-bold">Invalid email!</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Password</label>
+              <input type="password" class="form-control rounded-pill" id="formGroupExampleInput2" name="password" formControlName="password" placeholder="Password">
+
+              <div *ngIf="!password?.valid && (password?.dirty || password?.touched)">
+                <div [hidden]="!password.errors.required">
+                  <p class="text-danger mt-1 font-weight-bold">Password is required!</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="custom-control custom-checkbox mr-sm-2">
+                <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="rememberMe" formControlName="rememberMe">
+                <label class="custom-control-label" for="customControlAutosizing">Remember me</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="submit" [disabled]="!loginForm.valid" class="btn btn-primary btn-lg btn-block rounded-pill">Sign in</button>
+            </div>
+
+            <div class="form-group">
+              Don't have an account? <a [routerLink]="['/registration']">Sign up</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+<mat-tab-group dynamicHeight mat-align-tabs="center">
+    <mat-tab label="Information">
+      <p>Name: {{userInfo.fullName}}</p>
+      <mat-divider></mat-divider>
+      <p>Gender: {{userInfo.gender}}</p>
+      <mat-divider></mat-divider>
+      <p>Date of Birth: {{userInfo.dob | date:'mediumDate'}}</p>
+      <mat-divider></mat-divider>
+      <p>Phone: {{userInfo.phone}}</p>
+      <mat-divider></mat-divider>
+      <p>Address: {{userInfo.address}}</p>
+    </mat-tab>
+
+    <mat-tab label="Edit Information">
+      <div class="infoChange">
+        <form [formGroup]="informationChnageForm" #cform="ngForm" (ngSubmit)="onInfoChangeSubmit(cform.value)" novalidate>
+          <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" class="form-control rounded-pill" name="fullName" formControlName="fullName" [value]="userInfo.fullName" placeholder="FirstName LastName">
+
+              <div *ngIf="!fullName?.valid && (fullName?.dirty || fullName?.touched)">
+                <div [hidden]="!fullName.errors.required">
+                  <p class="text-danger mt-1">Full Name is required!</p>
+                </div>
+
+                <div [hidden]="!fullName.errors.pattern">
+                  <p class="text-danger mt-1">Full Name must contain FirstName & LastName & cann't contain any special character!</p>
+                </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label class="mr-sm-2" for="inlineFormCustomSelect">Gender</label>
+            <select class="custom-select mr-sm-2 rounded-pill" id="inlineFormCustomSelect" name="gender" formControlName="gender">
+              <option value="Male" selected="userInfo.gender === 'Male'">Male</option>
+              <option value="Female" selected="userInfo.gender === 'Female'">Female</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+              <label for="formGroupExampleInput2">Date of Birth</label>
+              <input type="date" class="form-control rounded-pill" id="formGroupExampleInput2" name="dob" formControlName="dob">
+
+              <div *ngIf="!dob?.valid && (dob?.dirty || dob?.touched)">
+                <div [hidden]="!dob.errors.required">
+                  <p class="text-danger mt-1">DOB is required!</p>
+                </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label for="formGroupExampleInput3">Phone</label>
+              <input type="tel" class="form-control rounded-pill" id="formGroupExampleInput3" name="phone" formControlName="phone" placeholder="Phone Number (01XXXXXXXXX)">
+
+              <div *ngIf="!phone?.valid && (phone?.dirty || phone?.touched)">
+                <div [hidden]="!phone.errors.required">
+                  <p class="text-danger mt-1">Phone Number is required!</p>
+                </div>
+
+                <div [hidden]="!phone.errors.pattern">
+                  <p class="text-danger mt-1">Invalid Phone Number!</p>
+                </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea class="form-control" id="address" name="address" formControlName="address"></textarea>
+
+            <div *ngIf="!address?.valid && (address?.dirty || address?.touched)">
+              <div [hidden]="!address.errors.required">
+                <p class="text-danger mt-1">Address is required!</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <button type="submit" [disabled]="!informationChnageForm.valid" class="btn btn-primary btn-lg btn-block rounded-pill">Update</button>
+          </div>
+        </form>
+      </div>
+    </mat-tab>
+  </mat-tab-group>

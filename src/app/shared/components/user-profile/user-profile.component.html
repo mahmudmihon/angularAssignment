@@ -1,0 +1,40 @@
+<div class="row">
+    <div CardSize class="card offset-2 shadow p-3 mb-5 bg-white rounded userImage">
+        <img class="card-img-top rounded-circle" src="{{userInfo.profilePicture}}" alt="Card image cap">
+    </div>
+
+    <div CardSize class="card offset-2 shadow p-3 bg-white rounded passwordChange">
+        <form [formGroup]="passwordChangeForm" #rform="ngForm" (ngSubmit)="onChangeSubmit(rform.value)" novalidate>
+            <div class="row">
+                <div class="col">
+                  <input type="password" class="form-control rounded-pill" name="password" formControlName="password" placeholder="New Password">
+
+                  <div *ngIf="!password?.valid && (password?.dirty || password?.touched)">
+                    <div [hidden]="!password.errors.required">
+                      <p class="text-danger mt-1 font-weight-bold">Password is required!</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <input type="password" class="form-control rounded-pill" name="confirmPassword" formControlName="confirmPassword" placeholder="Confirm Password">
+
+                  <div *ngIf="!confirmPassword?.valid && (confirmPassword?.dirty || confirmPassword?.touched)">
+                    <div [hidden]="!confirmPassword.errors.required">
+                      <p class="text-danger mt-1 font-weight-bold">Confirm password is required!</p>
+                    </div>
+                    <div *ngIf="confirmPassword.errors.passwordMatch">
+                        <p class="text-danger mt-1 font-weight-bold">Password don't match!</p>
+                      </div>
+                  </div>
+                </div>
+                <div class="col">
+                    <button type="submit" [disabled]="!passwordChangeForm.valid" class="btn btn-primary btn-lg btn-block rounded-pill">Change Password</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div CardSize class="card offset-2 shadow p-3 mb-5 bg-white rounded userInformation">
+      <app-user-information [userId]="userId"></app-user-information>
+  </div>
+</div>

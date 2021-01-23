@@ -1,0 +1,14 @@
+p {
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+.infoChange {
+    margin-top: 15px;
+    padding: 15px;
+}
+
+.infoChange p {
+    font-size: 15px;
+}
